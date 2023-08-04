@@ -56,13 +56,15 @@ Complex Complex::operator-() const
 // Overload addition operator
 Complex Complex::operator+(const Complex &z) const
 {
-    Complex z(mRe + z.mRe, mIm + z.mIm);
+    Complex w(mRe + z.mRe, mIm + z.mIm);
+    return w;
 }
 
 // Overload subtraction operator
 Complex Complex::operator-(const Complex &z) const
 {
-    Complex z(mRe - z.mRe, mIm - z.mIm);
+    Complex w(mRe - z.mRe, mIm - z.mIm);
+    return w;
 }
 
 // Overload cout

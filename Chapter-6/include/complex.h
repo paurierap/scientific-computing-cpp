@@ -19,8 +19,8 @@ public:
     Complex pow_n(double) const;
     Complex &operator=(const Complex &);
     Complex operator-() const;
-    Complex operator+(const Complex &);
-    Complex operator-(const Complex &);
+    Complex operator+(const Complex &) const;
+    Complex operator-(const Complex &) const;
     friend std::ostream &operator<<(std::ostream &, const Complex &);
 };
 
