@@ -72,7 +72,7 @@ std::ostream &operator<<(std::ostream &out, const Complex &z)
 {
     if (z.mIm >= 0)
     {
-        out << z.mRe << "+ i" << z.mIm;
+        out << z.mRe << "+" << z.mIm << "i";
         return out;
     }
 

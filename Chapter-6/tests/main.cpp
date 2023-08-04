@@ -5,9 +5,9 @@
 
 int main()
 {
-    int a;
+    Complex z(2, 3);
 
-    std::cout << a << std::endl;
+    std::cout << z << std::endl;
 
     return 0;
 }
