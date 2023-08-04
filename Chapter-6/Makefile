@@ -4,10 +4,13 @@
 # Variables to control Makefile operation
  
 CC = g++
-#CFLAGS = -Wall -g
+CFLAGS = -Wall -O
  
-# ****************************************************
-# Targets needed to bring the executable up to date
- 
-all: main.o
-	$(CC) -o main main.cpp Domain.cpp Curvebase.cpp Horline.cpp Vertline.cpp Expline.cpp
+complex.o: lib/complex.cpp include/complex.h
+		$(CC) $(CFLAGS) lib/complex.cpp
+
+main.o: tests/main.cpp include/complex.h
+		$(CC) $(CFLAGS) tests/main.cpp
+
+main: main.o complex.o
+		$(CC) $(CFLAGS) main complex.o main.o

@@ -24,4 +24,4 @@ public:
     friend std::ostream &operator<<(std::ostream &, const Complex &);
 };
 
-#endif complexnumbers
+#endif
