@@ -10,11 +10,30 @@ Complex::Complex()
     mIm = 0;
 }
 
-// Constructor
+// Constructor with default behaviour for real numbers
 Complex::Complex(double real, double imag)
 {
     mRe = real;
     mIm = imag;
+}
+
+// Copy constructor
+Complex::Complex(const Complex &z)
+{
+    mRe = z.mRe;
+    mIm = z.mIm;
+}
+
+// Get real part
+double Complex::getRe() const
+{
+    return mRe;
+}
+
+// Get imaginary part
+double Complex::getIm() const
+{
+    return mIm;
 }
 
 // Compute modulus
@@ -36,6 +55,17 @@ Complex Complex::pow_n(double n) const
     double mArg = arg();
     Complex z(pow(mMod, n) * cos(n * mArg), pow(mMod, n) * sin(n * mArg));
     return z;
+}
+
+Complex Complex::conjugate() const
+{
+    Complex w(mRe, -mIm);
+    return w;
+}
+
+void Complex::set2conj()
+{
+    mIm = -mIm;
 }
 
 // Overload assignment (=) operator
@@ -76,6 +106,16 @@ std::ostream &operator<<(std::ostream &out, const Complex &z)
         return out;
     }
 
-    out << z.mRe << "- i" << -z.mIm;
+    out << z.mRe << "-" << -z.mIm << "i";
     return out;
+}
+
+double real(const Complex &z)
+{
+    return z.mRe;
+}
+
+double imag(const Complex &z)
+{
+    return z.mIm;
 }
