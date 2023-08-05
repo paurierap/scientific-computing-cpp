@@ -1,25 +1,28 @@
 #ifndef matrix
 #define matrix
 
+#include <iostream>
+
 class Matrix
 {
 private:
-    int n;
+    int size;
     double **mat_els;
+    void allocate();
 
 public:
-    Matrix(double);
+    Matrix();
     Matrix(const Matrix &);
     Matrix(double, double, double, double);
     ~Matrix();
     double det() const;
     Matrix inv() const;
     Matrix &operator=(const Matrix &);
-    Matrix operator-();
-    Matrix operator+(const Matrix &);
-    Matrix operator-(const Matrix &);
-    Matrix operator*(const double &);
-    Matrix operator*(const Matrix &);
+    Matrix operator-() const;
+    Matrix operator+(const Matrix &) const;
+    Matrix operator-(const Matrix &) const;
+    Matrix operator*(const double &) const;
+    friend std::ostream &operator<<(std::ostream &, const Matrix &);
 };
 
 #endif

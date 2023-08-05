@@ -9,7 +9,7 @@ INC = include/matrix.h
 TEST = tests/main.cpp
 CFLAGS = -Wall -O
 
-complex.o: $(SRC) $(INC)
+matrix.o: $(SRC) $(INC)
 	$(CC) $(CFLAGS) -c $(SRC)
 
 main.o: $(TEST) $(SRC) $(INC)
