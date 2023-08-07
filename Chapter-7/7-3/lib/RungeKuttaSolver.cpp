@@ -5,7 +5,7 @@
 
 double RungeKuttaSolver::RightHandSide(double t, double y)
 {
-    return 1 + t;
+    return (*p_fun)(t, y);
 }
 
 void RungeKuttaSolver::SolveEquation()
@@ -15,6 +15,7 @@ void RungeKuttaSolver::SolveEquation()
     double t = initialTime, y = initialValue;
     double k1, k2, k3, k4;
 
+    output << "t, y" << std::endl;
     output << t << ", " << y << std::endl;
     do
     {

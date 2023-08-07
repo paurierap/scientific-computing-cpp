@@ -1,10 +1,11 @@
 #include "../include/ForwardEulerSolver.h"
 #include "../include/RungeKuttaSolver.h"
-/*double f(double t, double y)
+
+double f(double t, double y)
 {
     return 1 + t;
 }
-*/
+
 int main()
 {
     double t0 = 0, t1 = 1, y0 = 2;
@@ -17,13 +18,13 @@ int main()
         EulerSol[i].SetStepSize(h[i]);
         EulerSol[i].SetTimeInterval(t0, t1);
         EulerSol[i].SetInitialValue(y0);
-        // RKSol[i].RightHandSide();
+        EulerSol[i].p_fun = f;
         EulerSol[i].SolveEquation();
 
         RKSol[i].SetStepSize(h[i]);
         RKSol[i].SetTimeInterval(t0, t1);
         RKSol[i].SetInitialValue(y0);
-        // RKSol[i].RightHandSide();
+        RKSol[i].p_fun = f;
         RKSol[i].SolveEquation();
     }
 

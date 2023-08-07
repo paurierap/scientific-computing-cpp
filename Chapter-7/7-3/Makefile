@@ -8,10 +8,11 @@
 # Variables to control Makefile operation
 LIB_DIR = ./lib
 MAIN_DIR = ./tests
+INC_DIR = ./include
 
 # Compilation flags
 CXX = g++
-CXXFLAGS = -Wall -O
+CXXFLAGS = -Wall -O #-I /$(INC_DIR)
 
 # $^ references all prerequisites, and $@ references the target name
 main: main.o AbstractOdeSolver.o ForwardEulerSolver.o RungeKuttaSolver.o

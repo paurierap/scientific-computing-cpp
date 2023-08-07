@@ -5,7 +5,7 @@
 
 double ForwardEulerSolver::RightHandSide(double t, double y)
 {
-    return 1 + t;
+    return (*p_fun)(t, y);
 }
 
 void ForwardEulerSolver::SolveEquation()
@@ -14,6 +14,7 @@ void ForwardEulerSolver::SolveEquation()
     assert(output.is_open());
     double t = initialTime, y = initialValue;
 
+    output << "t, y" << std::endl;
     output << t << ", " << y << std::endl;
     do
     {
