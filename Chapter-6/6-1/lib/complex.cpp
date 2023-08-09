@@ -1,28 +1,16 @@
 // Implementation of complex numbers
 
-#include "../include/complex.h"
+#include "complex.hpp"
 #include <cmath>
 
 // Default constructor
-Complex::Complex()
-{
-    mRe = 0;
-    mIm = 0;
-}
+Complex::Complex() : mRe(0), mIm(0) {}
 
 // Constructor with default behaviour for real numbers
-Complex::Complex(double real, double imag)
-{
-    mRe = real;
-    mIm = imag;
-}
+Complex::Complex(double real, double imag) : mRe(real), mIm(imag) {}
 
 // Copy constructor
-Complex::Complex(const Complex &z)
-{
-    mRe = z.mRe;
-    mIm = z.mIm;
-}
+Complex::Complex(const Complex &z) : mRe(z.mRe), mIm(z.mIm) {}
 
 // Get real part
 double Complex::getRe() const

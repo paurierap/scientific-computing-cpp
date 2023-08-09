@@ -1,7 +1,7 @@
 // Testing the complex class
 
 #include <iostream>
-#include "../include/complex.h"
+#include "../lib/complex.hpp"
 
 int main()
 {
