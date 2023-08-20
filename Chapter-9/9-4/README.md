@@ -29,7 +29,9 @@ MyTestSuite.h:
 
   ```
     g++ -o main tests.cpp dependency1.cpp dependency2.cpp
-   ./main
+  ```
+  ```
+    ./main
   ```
 
   Running cxxtest tests (1 test).OK!
