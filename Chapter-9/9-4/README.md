@@ -22,10 +22,10 @@ MyTestSuite.h:
 
 2. Generate the tests file:
 
- # cxxtestgen --error-printer -o tests.cpp MyTestSuite.h
+ ``` cxxtestgen --error-printer -o tests.cpp MyTestSuite.h ```
 
 3. Compile and run!
 
-  # g++ -o main tests.cpp dependency1.cpp dependency2.cpp
-  # ./main
+  ``` g++ -o main tests.cpp dependency1.cpp dependency2.cpp
+   ./main ```
   Running cxxtest tests (1 test).OK!
