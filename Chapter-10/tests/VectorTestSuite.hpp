@@ -1,5 +1,3 @@
-// Esta una mica a mitges, la ultima part feia molta mandra.
-
 #include <cxxtest/TestSuite.h>
 #include "../lib/Vector.hpp"
 #include <cmath>
@@ -120,7 +118,7 @@ public:
             v[i] = y[i];
         }
 
-        v = v * 3;
+        v = v * a;
 
         TS_ASSERT_DELTA(v.norm(), 3 * sqrt(41), 1.e-6);
     }

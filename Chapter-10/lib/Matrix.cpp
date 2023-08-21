@@ -3,7 +3,24 @@
 #include <cmath>
 #include <iostream>
 
-/* Constructor */
+/* Constructor square matrix */
+
+Matrix::Matrix(int size) : mRows(size), mCols(size)
+{
+    assert(mRows > 0 && mCols > 0);
+
+    mData = new double *[mRows];
+    for (int i = 0; i < mRows; ++i)
+    {
+        mData[i] = new double[mCols];
+        for (int j = 0; j < mCols; ++j)
+        {
+            mData[i][j] = 0.;
+        }
+    }
+}
+
+/* Constructor general matrix */
 
 Matrix::Matrix(int rows, int cols) : mRows(rows), mCols(cols)
 {
@@ -101,6 +118,8 @@ Matrix Matrix::operator-() const
             M.mData[i][j] = -mData[i][j];
         }
     }
+
+    return M;
 }
 
 /* Addition of matrices. */
@@ -246,22 +265,23 @@ double Matrix::det() const
 
     double detsum = 0.;
 
-    for (int i = 0; i < mRows; ++i)
+    for (int k = 0; k < mRows; ++k)
     {
         Matrix A(mRows - 1, mCols - 1);
-        for (int j = 1; j < mRows - 1; j++)
-        {
-            for (int k = 0; j < mCols - 1; ++k)
-            {
-                if (k == i)
-                {
-                    continue;
-                }
 
-                A(j, k + 1) = mData[j][k];
+        for (int i = 1; i < mRows; ++i)
+        {
+            for (int j = 0; j < k; ++j)
+            {
+                A(i, j + 1) = mData[i][j];
+            }
+            for (int j = k + 1; j < mCols; ++j)
+            {
+                A(i, j) = mData[i][j];
             }
         }
-        detsum += pow(-1, i) * mData[0][i] * A.det();
+
+        detsum += pow(-1, k) * mData[0][k] * A.det();
     }
 
     return detsum;
