@@ -94,11 +94,101 @@ Matrix &Matrix::operator=(const Matrix &M)
 {
     assert(mRows == M.mRows && mCols == M.mCols);
 
+    if (this != &M)
+    {
+        for (int i = 0; i < mRows; ++i)
+        {
+            for (int j = 0; j < mCols; ++j)
+            {
+                mData[i][j] = M.mData[i][j];
+            }
+        }
+    }
+
+    return *this;
+}
+
+Matrix &Matrix::operator+=(const Matrix &M)
+{
+    assert(mRows == M.mRows && mCols == M.mCols);
+
     for (int i = 0; i < mRows; ++i)
     {
         for (int j = 0; j < mCols; ++j)
         {
-            mData[i][j] = M.mData[i][j];
+            mData[i][j] += M.mData[i][j];
+        }
+    }
+
+    return *this;
+}
+
+Matrix &Matrix::operator-=(const Matrix &M)
+{
+    assert(mRows == M.mRows && mCols == M.mCols);
+
+    for (int i = 0; i < mRows; ++i)
+    {
+        for (int j = 0; j < mCols; ++j)
+        {
+            mData[i][j] -= M.mData[i][j];
+        }
+    }
+
+    return *this;
+}
+
+Matrix &Matrix::operator*=(const Matrix &M)
+{
+    assert(mCols == M.mRows);
+
+    for (int i = 0; i < mRows; ++i)
+    {
+        for (int j = 0; j < M.mCols; ++j)
+        {
+            for (int k = 0; k < mCols; ++k)
+            {
+                mData[i][j] += mData[i][k] * M.mData[k][j];
+            }
+        }
+    }
+
+    return *this;
+}
+
+Matrix &Matrix::operator+=(double scalar)
+{
+    for (int i = 0; i < mRows; ++i)
+    {
+        for (int j = 0; j < mCols; ++j)
+        {
+            mData[i][j] += scalar;
+        }
+    }
+
+    return *this;
+}
+
+Matrix &Matrix::operator-=(double scalar)
+{
+    for (int i = 0; i < mRows; ++i)
+    {
+        for (int j = 0; j < mCols; ++j)
+        {
+            mData[i][j] -= scalar;
+        }
+    }
+
+    return *this;
+}
+
+Matrix &Matrix::operator*=(double scalar)
+{
+    for (int i = 0; i < mRows; ++i)
+    {
+        for (int j = 0; j < mCols; ++j)
+        {
+            mData[i][j] += scalar;
         }
     }
 
@@ -122,7 +212,7 @@ Matrix Matrix::operator-() const
     return M;
 }
 
-/* Addition of matrices. */
+/* Addition of matrices.
 
 Matrix Matrix::operator+(const Matrix &M) const
 {
@@ -139,11 +229,11 @@ Matrix Matrix::operator+(const Matrix &M) const
     }
 
     return A;
-}
+} */
 
 /* Subtraction of matrices. */
 
-Matrix Matrix::operator-(const Matrix &M) const
+/*Matrix Matrix::operator-(const Matrix &M) const
 {
     assert(mRows == M.mRows && mCols == M.mCols);
 
@@ -158,11 +248,11 @@ Matrix Matrix::operator-(const Matrix &M) const
     }
 
     return A;
-}
+} */
 
 /* Multiplication of matrices. */
 
-Matrix Matrix::operator*(const Matrix &M) const
+/*Matrix Matrix::operator*(const Matrix &M) const
 {
     assert(mCols == M.mRows);
 
@@ -180,6 +270,51 @@ Matrix Matrix::operator*(const Matrix &M) const
     }
 
     return A;
+} */
+
+Matrix operator+(const Matrix &A, const Matrix &B)
+{
+    return Matrix(A) += B;
+}
+
+Matrix operator-(const Matrix &A, const Matrix &B)
+{
+    return Matrix(A) -= B;
+}
+
+Matrix operator*(const Matrix &A, const Matrix &B)
+{
+    return Matrix(A) *= B;
+}
+
+Matrix operator+(const Matrix &A, double scalar)
+{
+    return Matrix(A) += scalar;
+}
+
+Matrix operator-(const Matrix &A, double scalar)
+{
+    return Matrix(A) -= scalar;
+}
+
+Matrix operator*(const Matrix &A, double scalar)
+{
+    return Matrix(A) *= scalar;
+}
+
+Matrix operator+(double scalar, const Matrix &A)
+{
+    return Matrix(A) += scalar;
+}
+
+Matrix operator-(double scalar, const Matrix &A)
+{
+    return Matrix(A) -= scalar;
+}
+
+Matrix operator*(double scalar, const Matrix &A)
+{
+    return Matrix(A) *= scalar;
 }
 
 /* Matrix-vector multiplication. */
@@ -203,7 +338,7 @@ Vector Matrix::operator*(const Vector &v) const
 
 /* Addition by a scalar. */
 
-Matrix Matrix::operator+(double scalar) const
+/*Matrix Matrix::operator+(double scalar) const
 {
     Matrix A(mRows, mCols);
 
@@ -216,11 +351,11 @@ Matrix Matrix::operator+(double scalar) const
     }
 
     return A;
-}
+}*/
 
 /* Subtraction by a scalar. */
 
-Matrix Matrix::operator-(double scalar) const
+/*Matrix Matrix::operator-(double scalar) const
 {
     Matrix A(mRows, mCols);
 
@@ -233,11 +368,11 @@ Matrix Matrix::operator-(double scalar) const
     }
 
     return A;
-}
+}*/
 
 /* Multiplication by a scalar. */
 
-Matrix Matrix::operator*(double scalar) const
+/*Matrix Matrix::operator*(double scalar) const
 {
     Matrix A(mRows, mCols);
 
@@ -250,7 +385,7 @@ Matrix Matrix::operator*(double scalar) const
     }
 
     return A;
-}
+}*/
 
 /* Compute determinant of square matrix. */
 

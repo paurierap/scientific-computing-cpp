@@ -65,7 +65,27 @@ Vector &Vector::operator=(const Vector &v)
     return *this;
 }
 
-Vector Vector::operator+() const
+Vector &Vector::operator+=(const Vector &v)
+{
+    assert(mSize == v.mSize);
+    for (int i = 0; i < mSize; ++i)
+    {
+        mData[i] += v.mData[i];
+    }
+    return *this;
+}
+
+Vector &Vector::operator-=(const Vector &v)
+{
+    assert(mSize == v.mSize);
+    for (int i = 0; i < mSize; ++i)
+    {
+        mData[i] -= v.mData[i];
+    }
+    return *this;
+}
+
+const Vector Vector::operator+() const
 {
     Vector v(mSize);
     for (int i = 0; i < mSize; ++i)
@@ -75,7 +95,7 @@ Vector Vector::operator+() const
     return v;
 }
 
-Vector Vector::operator-() const
+const Vector Vector::operator-() const
 {
     Vector v(mSize);
     for (int i = 0; i < mSize; ++i)
@@ -85,7 +105,17 @@ Vector Vector::operator-() const
     return v;
 }
 
-Vector Vector::operator+(const Vector &v) const
+Vector operator+(const Vector &lhs, const Vector &rhs)
+{
+    return Vector(lhs) += rhs;
+}
+
+Vector operator-(const Vector &lhs, const Vector &rhs)
+{
+    return Vector(lhs) -= rhs;
+}
+
+/*Vector Vector::operator+(const Vector &v) const
 {
     assert(mSize == v.mSize);
     Vector w(mSize);
@@ -96,7 +126,7 @@ Vector Vector::operator+(const Vector &v) const
     return w;
 }
 
-Vector Vector::operator-(const Vector &v) const
+const Vector Vector::operator-(const Vector &v) const
 {
     assert(mSize == v.mSize);
     Vector w(mSize);
@@ -105,9 +135,24 @@ Vector Vector::operator-(const Vector &v) const
         w[i] = mData[i] - v.mData[i];
     }
     return w;
+}*/
+
+Vector operator*(const Vector &v, double scalar)
+{
+    Vector u(v.mSize);
+    for (int i = 0; i < v.mSize; ++i)
+    {
+        u[i] = scalar * v.mData[i];
+    }
+    return u;
 }
 
-Vector Vector::operator*(const Matrix &M) const
+Vector operator*(double scalar, const Vector &v)
+{
+    return v * scalar;
+}
+
+const Vector Vector::operator*(const Matrix &M) const
 {
     assert(mSize == M.mCols);
 
@@ -124,7 +169,7 @@ Vector Vector::operator*(const Matrix &M) const
     return u;
 }
 
-Vector Vector::operator*(double a) const
+/*const Vector Vector::operator*(double a) const
 {
     Vector v(mSize);
     for (int i = 0; i < mSize; ++i)
@@ -132,7 +177,7 @@ Vector Vector::operator*(double a) const
         v[i] = a * mData[i];
     }
     return v;
-}
+}*/
 
 double Vector::norm(int p) const
 {

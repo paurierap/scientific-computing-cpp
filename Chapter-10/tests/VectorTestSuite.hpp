@@ -79,17 +79,18 @@ public:
     void TestAddition()
     {
         Vector v(3), u(3), w(3);
-        double y[3] = {2, -1, 6}, z[3] = {4, 2, 0};
+        double x[3] = {1, 1, 1}, y[3] = {2, -1, 6}, z[3] = {4, 2, 0};
 
         for (int i = 0; i < v.getSize(); ++i)
         {
+            w[i] = x[i];
             v[i] = y[i];
             u[i] = z[i];
         }
 
-        w = v + u;
+        w += v + u;
 
-        TS_ASSERT_DELTA(w.norm(), sqrt(73), 1.e-6);
+        TS_ASSERT_DELTA(w.norm(), sqrt(102), 1.e-6);
     }
 
     void TestSubtraction()
@@ -119,8 +120,10 @@ public:
         }
 
         v = v * a;
-
         TS_ASSERT_DELTA(v.norm(), 3 * sqrt(41), 1.e-6);
+
+        v = 1. / a * v;
+        TS_ASSERT_DELTA(v.norm(), sqrt(41), 1.e-6);
     }
 
     void TestAgainstSTDLibrary()

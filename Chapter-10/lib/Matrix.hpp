@@ -27,18 +27,42 @@ public:
     int getCols() const;
     double &operator()(int, int);
     Matrix &operator=(const Matrix &);
+    Matrix &operator+=(const Matrix &);
+    Matrix &operator-=(const Matrix &);
+    Matrix &operator*=(const Matrix &);
+    Matrix &operator+=(double);
+    Matrix &operator-=(double);
+    Matrix &operator*=(double);
     Matrix operator-() const;
-    Matrix operator+(const Matrix &) const;
-    Matrix operator-(const Matrix &) const;
-    Matrix operator*(const Matrix &) const;
+    friend Matrix operator+(const Matrix &, const Matrix &);
+    friend Matrix operator-(const Matrix &, const Matrix &);
+    friend Matrix operator*(const Matrix &, const Matrix &);
+    // Matrix operator+(const Matrix &) const;
+    // Matrix operator-(const Matrix &) const;
+    // Matrix operator*(const Matrix &) const;
+    friend Matrix operator+(const Matrix &, double);
+    friend Matrix operator-(const Matrix &, double);
+    friend Matrix operator*(const Matrix &, double);
+    friend Matrix operator+(double, const Matrix &);
+    friend Matrix operator-(double, const Matrix &);
+    friend Matrix operator*(double, const Matrix &);
     Vector operator*(const Vector &) const;
-    Matrix operator+(double) const;
-    Matrix operator-(double) const;
-    Matrix operator*(double) const;
+    // Matrix operator+(double) const;
+    // Matrix operator-(double) const;
+    // Matrix operator*(double) const;
     double det() const;
     friend std::ostream &operator<<(std::ostream &, const Matrix &);
 };
 
+Matrix operator+(const Matrix &, const Matrix &);
+Matrix operator-(const Matrix &, const Matrix &);
+Matrix operator*(const Matrix &, const Matrix &);
+Matrix operator+(const Matrix &, double);
+Matrix operator-(const Matrix &, double);
+Matrix operator*(const Matrix &, double);
+Matrix operator+(double, const Matrix &);
+Matrix operator-(double, const Matrix &);
+Matrix operator*(double, const Matrix &);
 std::ostream &operator<<(std::ostream &, const Matrix &);
 
 #endif
