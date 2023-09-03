@@ -27,6 +27,8 @@ public:
     int getCols() const;
     double &operator()(int, int);
     Matrix &operator=(const Matrix &);
+
+    // Trick: define operators +=, -=, etc. to later define +, - (see implementations)
     Matrix &operator+=(const Matrix &);
     Matrix &operator-=(const Matrix &);
     Matrix &operator*=(const Matrix &);
@@ -34,18 +36,20 @@ public:
     Matrix &operator-=(double);
     Matrix &operator*=(double);
     Matrix operator-() const;
+
+    // It is good practice to overload binary arithmetic operators using friend functions (also helps with symmetry issues with different data types)
     friend Matrix operator+(const Matrix &, const Matrix &);
     friend Matrix operator-(const Matrix &, const Matrix &);
     friend Matrix operator*(const Matrix &, const Matrix &);
-    // Matrix operator+(const Matrix &) const;
-    // Matrix operator-(const Matrix &) const;
-    // Matrix operator*(const Matrix &) const;
     friend Matrix operator+(const Matrix &, double);
     friend Matrix operator-(const Matrix &, double);
     friend Matrix operator*(const Matrix &, double);
     friend Matrix operator+(double, const Matrix &);
     friend Matrix operator-(double, const Matrix &);
     friend Matrix operator*(double, const Matrix &);
+    // Matrix operator+(const Matrix &) const;
+    // Matrix operator-(const Matrix &) const;
+    // Matrix operator*(const Matrix &) const;
     Vector operator*(const Vector &) const;
     // Matrix operator+(double) const;
     // Matrix operator-(double) const;
@@ -54,6 +58,7 @@ public:
     friend std::ostream &operator<<(std::ostream &, const Matrix &);
 };
 
+// Friend classes need to be declared besides their 'friend definition'
 Matrix operator+(const Matrix &, const Matrix &);
 Matrix operator-(const Matrix &, const Matrix &);
 Matrix operator*(const Matrix &, const Matrix &);

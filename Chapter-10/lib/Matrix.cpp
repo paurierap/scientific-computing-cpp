@@ -424,9 +424,9 @@ double Matrix::det() const
 
 std::ostream &operator<<(std::ostream &out, const Matrix &M)
 {
-    for (int i = 0; M.mRows; ++i)
+    for (int i = 0; i < M.mRows; ++i)
     {
-        for (int j = 0; M.mCols; ++j)
+        for (int j = 0; j < M.mCols; ++j)
         {
             out << " " << M.mData[i][j];
         }

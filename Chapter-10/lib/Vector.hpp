@@ -27,14 +27,19 @@ public:
     double read(int) const;
     double &operator()(int);
     Vector &operator=(const Vector &); // Copy assignment
+
+    // Trick: define operators +=, -=, etc. to later define +, - (see implementations)
     Vector &operator+=(const Vector &);
     Vector &operator-=(const Vector &);
     const Vector operator+() const;
     const Vector operator-() const;
+
+    // It is good practice to overload binary arithmetic operators using friend functions (also helps with symmetry issues with different data types)
     friend Vector operator+(const Vector &, const Vector &);
     friend Vector operator-(const Vector &, const Vector &);
     friend Vector operator*(const Vector &, double);
     friend Vector operator*(double, const Vector &);
+
     // const Vector operator+(const Vector &) const;
     // const Vector operator-(const Vector &) const;
     const Vector operator*(const Matrix &) const;
@@ -44,6 +49,7 @@ public:
     friend std::ostream &operator<<(std::ostream, const Vector &);
 };
 
+// Friend classes need to be declared besides their 'friend definition'
 Vector operator+(const Vector &, const Vector &);
 Vector operator-(const Vector &, const Vector &);
 Vector operator*(const Vector &, double);
