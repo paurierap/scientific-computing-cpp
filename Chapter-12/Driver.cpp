@@ -46,7 +46,6 @@ int main(int argc, char* argv[])
     BvpOde bvp2(&ode2, &bc2, numNodes2);
     bvp2.setFilename("solution_problem2.dat");
     bvp2.Solve();
-
-
+    
     return 0;
 }

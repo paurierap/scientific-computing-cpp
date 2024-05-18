@@ -16,10 +16,10 @@ class BvpOde
 private:
     BvpOde(const BvpOde& otherBvpOde) {}
 
-    int mNumNodes;
     FiniteDifferenceGrid *mGrid;
     SecondOrderOde *mOde;
     BoundaryConditions *mBCs;
+    int mNumNodes;
     Vector *mSol;
     Vector *mRhs;
     Matrix *mLhs;

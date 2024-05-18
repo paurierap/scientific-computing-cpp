@@ -15,7 +15,7 @@ protected:
 public:
     LinearSystem(const Matrix &, const Vector &);
     ~LinearSystem();
-    virtual Vector solve();
+    Vector solve();
 };
 
 #endif
