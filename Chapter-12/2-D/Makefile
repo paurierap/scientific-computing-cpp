@@ -17,10 +17,10 @@ OBJS := $(SRCS:$(LIB_DIR)/%=%.o)
 
 # Compilation flags
 CXX = g++
-CXXFLAGS = -Wall -O #-I /$(INC_DIR)
+# CXXFLAGS = -Wall -O #-I /$(INC_DIR)
 
 # Debugging flags
-# CXXFLAGS = -g
+CXXFLAGS = -g
 
 # $^ references all prerequisites, and $@ references the target name
 Driver: Driver.o $(OBJS)

@@ -17,9 +17,11 @@ mOde(pOde), mBCs(pBcs), mXNumNodes(XnumNodes), mYNumNodes(YnumNodes)
 
     // Allocate the rest of data members:
     mGrid = new FiniteDifferenceGrid(mXNumNodes, mYNumNodes, mOde->mXmin, mOde->mXmax, mOde->mYmin, mOde->mYmax);
-    mSol = new Vector((mXNumNodes - 2)*(mYNumNodes - 2));
-    mRhs = new Vector((mXNumNodes - 2)*(mYNumNodes - 2));
-    mLhs = new Matrix((mXNumNodes - 2)*(mYNumNodes - 2));
+    total_int_nodes = (mXNumNodes - 2)*(mYNumNodes - 2);
+    total_b_nodes = 2*(mXNumNodes + mYNumNodes) - 4;
+    mSol = new Vector(total_int_nodes);
+    mRhs = new Vector(total_int_nodes);
+    mLhs = new Matrix(total_int_nodes);
 
     // Initialize with nullptr:
     mLinearSystem = nullptr;
@@ -47,7 +49,7 @@ BvpOde::~BvpOde()
 void BvpOde::PopulateRhs()
 {
 
-    for (int i = 0; i < (mXNumNodes - 1)*(mYNumNodes - 1); i++)
+    for (int i = 0; i < total_int_nodes; i++)
     {
         (*mRhs)(i + 1) = mOde->mpRhsFun(mGrid->intNodes[i].x, mGrid->intNodes[i].y);
     }
@@ -58,19 +60,22 @@ void BvpOde::PopulateRhs()
 // Populate LHS matrix:
 void BvpOde::PopulateLhs()
 {
-    /*
-    // Loop from indices i=2,...,N-1
-    for (int i = 2; i < mNumNodes; i++)
+    
+    for (int j = 0; j < total_int_nodes; j++)
     {
-        double x_pre = mGrid->mNodes[i-2].coordinate;
-        double x = mGrid->mNodes[i-1].coordinate;
-        double x_post = mGrid->mNodes[i].coordinate;
+        int i = mGrid->intNodes[j].pos;
+        int north = mGrid->intNodes[j].north;
+        int east = mGrid->intNodes[j].east;
+        int south = mGrid->intNodes[j].south;
+        int west = mGrid->intNodes[j].west;
 
-        (*mLhs)(i,i-1) = 1. / (x_post - x_pre) * (2. * mOde->mCoeffUxx / (x - x_pre) - mOde->mCoeffUx);
-        (*mLhs)(i,i) = mOde->mCoeffU - 2. * mOde->mCoeffUxx / (x_post - x_pre) *(1. / (x_post - x) + 1. / (x - x_pre));
-        (*mLhs)(i,i+1) = 1. / (x_post - x_pre) * (2. * mOde->mCoeffUxx / (x_post - x) + mOde->mCoeffUx);
+        (*mLhs)(i,i) = 0;
+        (*mLhs)(i,north) = 0;
+        (*mLhs)(i,east) = 0;
+        (*mLhs)(i,south) = 0;
+        (*mLhs)(i,west) = 0;
     }
-    */
+
     std::cout << "LHS populated.\n"; 
 }
 

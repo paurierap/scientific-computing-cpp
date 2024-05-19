@@ -20,6 +20,7 @@ private:
     SecondOrderOde *mOde;
     BoundaryConditions *mBCs;
     int mXNumNodes, mYNumNodes;
+    int total_int_nodes, total_b_nodes;
     Vector *mSol;
     Vector *mRhs;
     Matrix *mLhs;
