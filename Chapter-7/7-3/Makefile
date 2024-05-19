@@ -3,7 +3,6 @@
 #	commands
 
 # DO NOT COMPILE HEADER FILES!
-# There must be a more compact way to do this, but this works jeje
 
 # Variables to control Makefile operation
 LIB_DIR = ./lib
@@ -23,15 +22,6 @@ main.o: $(MAIN_DIR)/main.cpp
 
 %.o: $(LIB_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $^
-
-#AbstractOdeSolver.o: $(LIB_DIR)/AbstractOdeSolver.cpp
-#	$(CXX) $(CXXFLAGS) -c $^
-
-#ForwardEulerSolver.o: $(LIB_DIR)/ForwardEulerSolver.cpp
-#	$(CXX) $(CXXFLAGS) -c $^
-
-#RungeKuttaSolver.o: $(LIB_DIR)/RungeKuttaSolver.cpp
-#	$(CXX) $(CXXFLAGS) -c $^
 
 # Run "$ make clean" to remove all object files
 clean:

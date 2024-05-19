@@ -3,7 +3,6 @@
 #	commands
 
 # DO NOT COMPILE HEADER FILES!
-# There must be a more compact way to do this, but this works jeje
 
 # Variables to control Makefile operation
 LIB_DIR = ./lib

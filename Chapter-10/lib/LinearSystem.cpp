@@ -1,6 +1,7 @@
 #include "LinearSystem.hpp"
 #include "Matrix.hpp"
 #include "Vector.hpp"
+#include <cassert>
 #include <cmath>
 
 LinearSystem::LinearSystem(const LinearSystem &other_system)

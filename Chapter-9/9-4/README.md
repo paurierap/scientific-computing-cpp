@@ -1,11 +1,12 @@
-From the Github page: https://github.com/CxxTest/cxxtest
+# Exception Handling
 
-A Simple Example
-----------------
+From this [Github page](https://github.com/CxxTest/cxxtest).
+
+## A Simple Example
 
 1. Create a test suite header file:
 
-```
+```c++
 MyTestSuite.h:
 
   #include <cxxtest/TestSuite.h>
@@ -23,15 +24,19 @@ MyTestSuite.h:
 
 2. Generate the tests file:
 
- ``` cxxtestgen --error-printer -o tests.cpp MyTestSuite.h ```
+ ```console
+ cxxtestgen --error-printer -o tests.cpp MyTestSuite.h 
+ ```
 
 3. Compile and run!
 
-  ```
+  ```console
     g++ -o main tests.cpp dependency1.cpp dependency2.cpp
   ```
-  ```
+  ```console
     ./main
   ```
 
+  ```console
   Running cxxtest tests (1 test).OK!
+  ```
