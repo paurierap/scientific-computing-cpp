@@ -5,48 +5,48 @@ class SecondOrderOde
 {
     friend class BvpOde;
 private:
+
+    // Coefficients and RHS function
     double mCoeffUxx;
     bool mCoeffUxxisSet;
-    double mCoeffUx;
-    bool mCoeffUxisSet;
-    double mCoeffU;
-    bool mCoeffUisSet;
-    double (*mpRhsFun) (double x);
+    double mCoeffUyy;
+    bool mCoeffUyyisSet;
+    double (*mpRhsFun) (double x, double y);
     bool mRhsFunisSet;
 
+    // Grid delimitators
     double mXmin;
     bool mXminisSet;
     double mXmax;
     bool mXmaxisSet;
+    double mYmin;
+    bool mYminisSet;
+    double mYmax;
+    bool mYmaxisSet;
 
 public:
 
     // Especialized constructor commented for the sake of exercise 12.3:
-    /*SecondOrderOde(double coeffUxx, double coeffUx, 
-                   double coeffU, double (*Rhsfun) (double x),
-                   double xmin, double xmax) : mCoeffUxx(coeffUxx), mCoeffUx(coeffUx), 
-                   mCoeffU(coeffU), mpRhsFun(Rhsfun), mXmin(xmin), mXmax(xmax) {}*/
+    /*SecondOrderOde(double coeffUxx, double coeffUyy, double (*Rhsfun) (double x, double y),
+                   double xmin, double xmax, double ymin, double ymax) : mCoeffUxx(coeffUxx), 
+                   mCoeffUyy(coeffUyy), mpRhsFun(Rhsfun), mXmin(xmin), mXmax(xmax),
+                   mYmin(ymin), mYmax(ymax){}*/
     SecondOrderOde()
     {
-        mCoeffUxxisSet = mCoeffUxisSet = mCoeffUisSet = 
-        mRhsFunisSet = mXminisSet = mXmaxisSet = false;
+        mCoeffUxxisSet = mCoeffUyyisSet = mRhsFunisSet = 
+        mXminisSet = mXmaxisSet = mYminisSet = mYmaxisSet = false;
     }
     void setCoeffofUxx(double coeffUxx)
     {
         mCoeffUxx = coeffUxx;
         mCoeffUxxisSet = true;
     }
-    void setCoeffofUx(double coeffUx)
+    void setCoeffofUyy(double coeffUyy)
     {
-        mCoeffUx = coeffUx;
-        mCoeffUxisSet = true;
+        mCoeffUyy = coeffUyy;
+        mCoeffUyyisSet = true;
     }
-    void setCoeffofU(double coeffU)
-    {
-        mCoeffU = coeffU;
-        mCoeffUisSet = true;
-    }
-    void setRhsFun(double (*Rhsfun) (double x))
+    void setRhsFun(double (*Rhsfun) (double x, double y))
     {
         mpRhsFun = Rhsfun;
         mRhsFunisSet = true;
@@ -60,6 +60,16 @@ public:
     {
         mXmax = Xmax;
         mXmaxisSet = true;
+    }
+    void setYmin(double Ymin)
+    {
+        mYmin = Ymin;
+        mYminisSet = true;
+    }
+    void setYmax(double Ymax)
+    {
+        mYmax = Ymax;
+        mYmaxisSet = true;
     }
 };
 

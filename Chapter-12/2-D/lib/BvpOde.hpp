@@ -19,7 +19,7 @@ private:
     FiniteDifferenceGrid *mGrid;
     SecondOrderOde *mOde;
     BoundaryConditions *mBCs;
-    int mNumNodes;
+    int mXNumNodes, mYNumNodes;
     Vector *mSol;
     Vector *mRhs;
     Matrix *mLhs;
@@ -32,7 +32,7 @@ private:
     void PopulateRhs();
     void ApplyBCs();
 public:
-    BvpOde(SecondOrderOde* pOde, BoundaryConditions* pBcs, int numNodes);
+    BvpOde(SecondOrderOde* pOde, BoundaryConditions* pBcs, int XnumNodes, int YnumNodes);
     ~BvpOde();
     void setGrid(const std::vector<Node>&);
     void setFilename(const std::string& name)

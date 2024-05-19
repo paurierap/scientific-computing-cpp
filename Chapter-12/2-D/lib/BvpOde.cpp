@@ -5,20 +5,21 @@
 #include <cmath>
 
 // Constructor:
-BvpOde::BvpOde(SecondOrderOde* pOde, BoundaryConditions* pBcs, int numNodes) : mOde(pOde), mBCs(pBcs), mNumNodes(numNodes)
+BvpOde::BvpOde(SecondOrderOde* pOde, BoundaryConditions* pBcs, int XnumNodes, int YnumNodes) : 
+mOde(pOde), mBCs(pBcs), mXNumNodes(XnumNodes), mYNumNodes(YnumNodes)
 {
     // Ensure number of nodes is strictly positive:
-    assert(mNumNodes > 0);
+    assert(mXNumNodes > 0 && mYNumNodes > 0);
 
     // Ensure ODE is well-defined;
-    assert(mOde->mCoeffUxxisSet && mOde->mCoeffUxisSet && mOde->mCoeffUisSet &&
-           mOde->mRhsFunisSet && mOde->mXminisSet && mOde->mXmaxisSet);
+    assert(mOde->mCoeffUxxisSet && mOde->mCoeffUyyisSet && mOde->mRhsFunisSet && 
+           mOde->mXminisSet && mOde->mXmaxisSet && mOde->mYminisSet && mOde->mYmaxisSet);
 
     // Allocate the rest of data members:
-    mGrid = new FiniteDifferenceGrid(mNumNodes, mOde->mXmin, mOde->mXmax);
-    mSol = new Vector(mNumNodes);
-    mRhs = new Vector(mNumNodes);
-    mLhs = new Matrix(mNumNodes);
+    mGrid = new FiniteDifferenceGrid(mXNumNodes, mYNumNodes, mOde->mXmin, mOde->mXmax, mOde->mYmin, mOde->mYmax);
+    mSol = new Vector((mXNumNodes - 2)*(mYNumNodes - 2));
+    mRhs = new Vector((mXNumNodes - 2)*(mYNumNodes - 2));
+    mLhs = new Matrix((mXNumNodes - 2)*(mYNumNodes - 2));
 
     // Initialize with nullptr:
     mLinearSystem = nullptr;
@@ -46,10 +47,9 @@ BvpOde::~BvpOde()
 void BvpOde::PopulateRhs()
 {
 
-    // Loop from indices i=2,...,N-1
-    for (int i = 2; i < mNumNodes; i++)
+    for (int i = 0; i < (mXNumNodes - 1)*(mYNumNodes - 1); i++)
     {
-        (*mRhs)(i) = mOde->mpRhsFun(mGrid->mNodes[i-1].coordinate);
+        (*mRhs)(i + 1) = mOde->mpRhsFun(mGrid->intNodes[i].x, mGrid->intNodes[i].y);
     }
 
     std::cout << "RHS populated.\n";
@@ -58,6 +58,7 @@ void BvpOde::PopulateRhs()
 // Populate LHS matrix:
 void BvpOde::PopulateLhs()
 {
+    /*
     // Loop from indices i=2,...,N-1
     for (int i = 2; i < mNumNodes; i++)
     {
@@ -69,14 +70,14 @@ void BvpOde::PopulateLhs()
         (*mLhs)(i,i) = mOde->mCoeffU - 2. * mOde->mCoeffUxx / (x_post - x_pre) *(1. / (x_post - x) + 1. / (x - x_pre));
         (*mLhs)(i,i+1) = 1. / (x_post - x_pre) * (2. * mOde->mCoeffUxx / (x_post - x) + mOde->mCoeffUx);
     }
-
+    */
     std::cout << "LHS populated.\n"; 
 }
 
 // Apply BCs to indices i=1 and i=N:
 void BvpOde::ApplyBCs()
 {
-
+    /*
     bool LhsBC = false;
     bool RhsBC = false;
 
@@ -118,20 +119,8 @@ void BvpOde::ApplyBCs()
 
     assert(LhsBC);
     assert(RhsBC);
+    */
     std::cout << "BCs applied.\n"; 
-}
-
-// Set grid using a specified one:
-void BvpOde::setGrid(const std::vector<Node>& grid)
-{
-    mNumNodes = grid.size();
-
-    // Ensure that there are nodes and they correspond with boundary conditions:
-    assert(mNumNodes > 0);
-    assert(std::fabs(mOde->mXmin - grid[0].coordinate) < 1e-8);
-    assert(std::fabs(mOde->mXmax - grid[mNumNodes-1].coordinate) < 1e-8);
-
-    mGrid->setGrid(grid);
 }
 
 // Solve linear system and assign solution to mSol:
@@ -153,6 +142,7 @@ void BvpOde::Solve()
 // Write solution file:
 void BvpOde::WriteSolutionFile()
 {
+    /*
     std::ofstream outputfile;
     outputfile.open(mFilename);
 
@@ -164,4 +154,5 @@ void BvpOde::WriteSolutionFile()
     outputfile.close();
 
     std::cout << "File " << mFilename << " created and filled." << std::endl;
+    */
 }

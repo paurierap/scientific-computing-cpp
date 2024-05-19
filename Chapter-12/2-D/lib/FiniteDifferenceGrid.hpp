@@ -2,7 +2,8 @@
 #define FINITEDIFFERENCEGRIDHEADER
 
 #include <vector>
-#include "Node.hpp"
+#include "BoundaryNode.hpp"
+#include "InteriorNode.hpp"
 #include <iostream>
 
 class FiniteDifferenceGrid
@@ -10,11 +11,11 @@ class FiniteDifferenceGrid
 public:
     friend class BvpOde;
 private:
-    int mNumNodes;
-    std::vector<Node> mNodes;
+    int mXNumNodes, mYNumNodes;
+    std::vector<InteriorNode> intNodes;
+    std::vector<BoundaryNode> bNodes;
 public:
-    FiniteDifferenceGrid(int numNodes, double xmin, double xmax);
-    void setGrid(const std::vector<Node>&);
+    FiniteDifferenceGrid(int XnumNodes, int YnumNodes, double xmin, double xmax, double ymin, double ymax);
     friend std::ostream &operator<<(std::ostream&, const FiniteDifferenceGrid&);
 };
 

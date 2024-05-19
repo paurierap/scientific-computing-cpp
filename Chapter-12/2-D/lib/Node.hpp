@@ -4,7 +4,7 @@
 class Node
 {
 public:
-    double coordinate;
+    double x, y;
 };
 
 #endif
