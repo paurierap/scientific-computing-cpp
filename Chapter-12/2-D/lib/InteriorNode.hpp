@@ -7,7 +7,12 @@ class InteriorNode : public Node
 {
 public:
     int pos;
-    int north, east, south, west;
+    int north;
+    int east;
+    int south;
+    int west;
+
+    InteriorNode(double x, double y) : Node(x, y) {}
 };
 
 #endif

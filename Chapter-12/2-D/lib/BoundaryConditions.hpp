@@ -7,19 +7,21 @@ public:
     friend class BvpOde;
 
 private:
-    bool mLhsBcisDirichlet;
-    bool mRhsBcisDirichlet;
-    bool mLhsBcisNeumann;
-    bool mRhsBcisNeumann;
-    double mLhsBcValue;
-    double mRhsBcValue;
+    bool isTopBCset;
+    bool isBottomBCset;
+    bool isLeftBCset;
+    bool isRightBCset;
+    double (*mpTopBoundary)(double);
+    double (*mpBottomBoundary)(double);
+    double (*mpLeftBoundary)(double);
+    double (*mpRightBoundary)(double);
 
 public:
     BoundaryConditions();
-    void setLhsDirichletBc(double lhsValue);
-    void setRhsDirichletBc(double rhsValue);
-    void setLhsNeumannBc(double lhsDerivValue);
-    void setRhsNeumannBc(double rhsDerivValue);
+    void setTopBc(double (*TopBoundary)(double));
+    void setBottomBc(double (*BottomBoundary)(double));
+    void setLeftBc(double (*LeftBoundary)(double));
+    void setRightBc(double (*RightBoundary)(double));
 };
 
 #endif

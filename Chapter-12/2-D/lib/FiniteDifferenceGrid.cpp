@@ -20,25 +20,32 @@ FiniteDifferenceGrid::FiniteDifferenceGrid(int XnumNodes, int YnumNodes, double 
             double xi = xmin + j*hx;
 
             // Check whether it lays on the boundary:
-            if (fabs(yi - ymin) < eps || fabs(yi - ymax) < eps || fabs(xi - xmin) < eps || fabs(xi - xmax) < eps)
+            if (fabs(yi - ymin) < eps || fabs(yi - ymax) < eps || fabs(xi - xmin) < eps || 
+                fabs(xi - xmax) < eps)
             {
-                BoundaryNode node;
-                node.x = xi;
-                node.y = yi;
+                BoundaryNode node(xi, yi);
                 node.pos = count;
+
+                node.isBottomBoundary = (fabs(yi - ymin) < eps) ? true : 0;
+                node.isTopBoundary = (fabs(yi - ymax) < eps) ? true : 0;
+                node.isLeftBoundary = (fabs(xi - xmin) < eps) ? true : 0;
+                node.isRightBoundary = (fabs(xi - xmax) < eps) ? true : 0;
+
                 bNodes.push_back(node);
+                globalNum.insert({count, node});
             }
             else
             {
-                InteriorNode node;
-                node.x = xi;
-                node.y = yi;
+                InteriorNode node(xi, yi);
                 node.pos = count;
+                
                 node.north = count + mXNumNodes;
                 node.east = count + 1;
                 node.south = count - mXNumNodes;
                 node.west = count - 1;
+
                 intNodes.push_back(node);
+                globalNum.insert({count, node});
             }
 
             count++;
@@ -47,24 +54,4 @@ FiniteDifferenceGrid::FiniteDifferenceGrid(int XnumNodes, int YnumNodes, double 
 
     std::cout << "Finite Difference Grid with " << mXNumNodes << " nodes in the x direction and ";
     std::cout << mYNumNodes << " nodes in the y direction created.\n";
-}
-
-// Overloading the output stream insertion << operator
-std::ostream &operator<<(std::ostream &output, const FiniteDifferenceGrid &grid)
-{
-    output << "Boundary nodes are: ";
-    for (auto node : grid.bNodes)
-    {
-        output << "(" << node.x << ", " << node.y << ") ";
-    }
-    output << "\n";
-
-    output << "Interior nodes are: ";
-    for (auto node : grid.intNodes)
-    {
-        output << "(" << node.x << ", " << node.y << ") ";
-    }
-    output << "\n";
-
-    return output;
 }

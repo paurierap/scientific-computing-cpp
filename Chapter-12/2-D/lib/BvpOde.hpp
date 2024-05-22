@@ -20,7 +20,6 @@ private:
     SecondOrderOde *mOde;
     BoundaryConditions *mBCs;
     int mXNumNodes, mYNumNodes;
-    int total_int_nodes, total_b_nodes;
     Vector *mSol;
     Vector *mRhs;
     Matrix *mLhs;
@@ -29,9 +28,10 @@ private:
     // Specify output file name
     std::string mFilename;
 
+    void ApplyBCs();
     void PopulateLhs();
     void PopulateRhs();
-    void ApplyBCs();
+    
 public:
     BvpOde(SecondOrderOde* pOde, BoundaryConditions* pBcs, int XnumNodes, int YnumNodes);
     ~BvpOde();
@@ -41,6 +41,7 @@ public:
         mFilename = name;
     }
     void Solve();
+    void getGrid();
     void WriteSolutionFile();
 };
 

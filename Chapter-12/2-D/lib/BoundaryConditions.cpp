@@ -3,36 +3,29 @@
 
 BoundaryConditions::BoundaryConditions()
 {
-    mLhsBcisDirichlet = false;
-    mRhsBcisDirichlet = false;
-    mLhsBcisNeumann = false;
-    mRhsBcisNeumann = false;
+    isTopBCset = isBottomBCset = isLeftBCset = isRightBCset = false;
 }
 
-void BoundaryConditions::setLhsDirichletBc(double lhsValue)
+void BoundaryConditions::setTopBc(double (*TopBoundary)(double x))
 {
-    assert(!mLhsBcisNeumann);
-    mLhsBcisDirichlet = true;
-    mLhsBcValue = lhsValue;
+    mpTopBoundary = TopBoundary;
+    isTopBCset = true;
 }
 
-void BoundaryConditions::setRhsDirichletBc(double rhsValue)
+void BoundaryConditions::setBottomBc(double (*BottomBoundary)(double x))
 {
-    assert(!mRhsBcisNeumann);
-    mRhsBcisDirichlet = true;
-    mRhsBcValue = rhsValue;
+    mpBottomBoundary = BottomBoundary;
+    isBottomBCset = true;
 }
 
-void BoundaryConditions::setLhsNeumannBc(double lhsDerivValue)
+void BoundaryConditions::setLeftBc(double (*LeftBoundary)(double y))
 {
-    assert(!mLhsBcisDirichlet);
-    mLhsBcisNeumann = true;
-    mLhsBcValue = lhsDerivValue;
+    mpLeftBoundary = LeftBoundary;
+    isLeftBCset = true;
 }
 
-void BoundaryConditions::setRhsNeumannBc(double rhsDerivValue)
+void BoundaryConditions::setRightBc(double (*RightBoundary)(double y))
 {
-    assert(!mRhsBcisDirichlet);
-    mRhsBcisNeumann = true;
-    mRhsBcValue = rhsDerivValue;
+    mpRightBoundary = RightBoundary;
+    isRightBCset = true;
 }

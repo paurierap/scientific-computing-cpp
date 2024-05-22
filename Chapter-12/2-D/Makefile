@@ -17,10 +17,7 @@ OBJS := $(SRCS:$(LIB_DIR)/%=%.o)
 
 # Compilation flags
 CXX = g++
-# CXXFLAGS = -Wall -O #-I /$(INC_DIR)
-
-# Debugging flags
-CXXFLAGS = -g
+CXXFLAGS = -Wall -O2 #-I /$(INC_DIR)
 
 # $^ references all prerequisites, and $@ references the target name
 Driver: Driver.o $(OBJS)
@@ -32,6 +29,9 @@ Driver.o: $(MAIN_DIR)/Driver.cpp
 # Build step for C++ source
 %.cpp.o: $(LIB_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $^ -o $@
+
+debug: CXXFLAGS += -O0 -g
+debug: Driver
 
 # "$ make clean" to remove all object files
 clean:

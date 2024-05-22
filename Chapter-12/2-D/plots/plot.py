@@ -4,39 +4,48 @@ import numpy as np
 import matplotlib.pyplot as plt
 from fig_config import *
 
-file1 = "../solution_problem1.dat"
-file2 = "../solution_problem2.dat"
+sol_file = "../solution_poisson.dat"
+xgrid_file = "../x_grid.dat"
+ygrid_file = "../y_grid.dat"
 
-x1, sol1 = [], []
-x2, sol2 = [], []
+sol = []
+xgrid = []
+ygrid = []
 
-def exact_sol1(x):
-    return 0.5*x*(1-x)
+def exact_sol(x, y):
+    return np.exp(-(x*x + y*y))
 
-def exact_sol2(x):
-    return (4*np.exp(x)+np.exp(-4*x)) / (4*np.exp(np.pi)+np.exp(-4*np.pi)) - 5*np.sin(x) - 3*np.cos(x)
-
-with open(file1, "r") as input:
+# Load approximate solution
+with open(sol_file, "r") as input:
     for line in input:
-        data = line.split(", ")
-        x1.append(float(data[0]))
-        sol1.append(float(data[1]))
+        data = line.split(" ")
+        sol.append(np.array([float(x) for x in data[:-1]]))
 
-with open(file2, "r") as input:
+# Load x grid
+with open(xgrid_file, "r") as input:
     for line in input:
-        data = line.split(", ")
-        x2.append(float(data[0]))
-        sol2.append(float(data[1]))
+        data = line.split(" ")
+        xgrid.append(np.array([float(x) for x in data[:-1]]))
 
-x1, sol1 = np.array(x1), np.array(sol1)
-x2, sol2 = np.array(x2), np.array(sol2)
+# Load y grid
+with open(ygrid_file, "r") as input:
+    for line in input:
+        data = line.split(" ")
+        ygrid.append(np.array([float(x) for x in data[:-1]]))
+
+sol, xgrid, ygrid = np.array(sol), np.array(xgrid), np.array(ygrid)
+
+print("Max error between approx and exact solution is: ", abs(sol - exact_sol(xgrid, ygrid)).max())
 
 #figure_features()
 fig = plt.figure(figsize=(10,6))
 ax = plt.axes()
-ax.set(xlabel="$x$", ylabel="$u(x)$")
-#add_grid(ax)
+ax = fig.add_subplot(111, projection='3d')
 
-ax.plot(x1, sol1)
-ax.plot(x1, exact_sol1(x1), '--')
+ax.plot_surface(xgrid, ygrid, sol)
+
+ax.set_xlabel('$x$')
+ax.set_ylabel('$y$')
+ax.set_zlabel('$u(x,y)$')
+
 plt.show()
