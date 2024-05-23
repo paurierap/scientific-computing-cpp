@@ -17,9 +17,10 @@ mOde(pOde), mBCs(pBcs), mXNumNodes(XnumNodes), mYNumNodes(YnumNodes)
 
     // Ensure BCs are set:
     assert(pBcs->isTopBCset && pBcs->isBottomBCset && pBcs->isLeftBCset && pBcs->isRightBCset);
-
+    
     // Allocate the rest of data members:
-    mGrid = new FiniteDifferenceGrid(mXNumNodes, mYNumNodes, mOde->mXmin, mOde->mXmax,   mOde->mYmin, mOde->mYmax);
+    mGrid = new FiniteDifferenceGrid(mXNumNodes, mYNumNodes, mOde->mXmin, 
+                                     mOde->mXmax, mOde->mYmin, mOde->mYmax);
     mSol = new Vector(mXNumNodes * mYNumNodes);
     mRhs = new Vector(mXNumNodes * mYNumNodes);
     mLhs = new Matrix(mXNumNodes * mYNumNodes);
@@ -76,18 +77,9 @@ void BvpOde::ApplyBCs()
 void BvpOde::PopulateRhs()
 {
 
-    for (auto node : mGrid->intNodes)
-    {
-        int i = node.pos;
-        (*mRhs)(i + 1) = mOde->mpRhsFun(node.x, node.y);
-    }
-
-    for (auto node : mGrid->bNodes)
-    {
-        int i = node.pos;
-        (*mRhs)(i + 1) = node.u_val;
-    }
-
+    for (auto node : mGrid->intNodes) (*mRhs)(node.pos + 1) = mOde->mpRhsFun(node.x, node.y);
+    for (auto node : mGrid->bNodes) (*mRhs)(node.pos + 1) = node.u_val;
+    
     std::cout << "RHS populated.\n";
 }
 
@@ -103,18 +95,15 @@ void BvpOde::PopulateLhs()
         Node south = mGrid->globalNum[node.south];
         Node west = mGrid->globalNum[node.west];
 
-        (*mLhs)(i + 1, i + 1) = - 2 * (1 / (east.x - node.x) / (node.x - west.x) + 1 / (north.y -   node.y) / (node.y - south.y));
-        (*mLhs)(i + 1, node.north + 1) = 2 / (north.y - south.y) / (north.y - node.y);
-        (*mLhs)(i + 1, node.east + 1) = 2 / (east.x - west.x) / (east.x - node.x);
-        (*mLhs)(i + 1, node.south + 1) = 2 / (north.y - south.y) / (node.y - south.y);
-        (*mLhs)(i + 1, node.west + 1) = 2 / (east.x - west.x) / (node.x - west.x);
+        (*mLhs)(i + 1, i + 1) = - 2. * (1. / (east.x - node.x) / (node.x - west.x) + 
+                                1. / (north.y - node.y) / (node.y - south.y));
+        (*mLhs)(i + 1, node.north + 1) = 2. / (north.y - south.y) / (north.y - node.y);
+        (*mLhs)(i + 1, node.east + 1) = 2. / (east.x - west.x) / (east.x - node.x);
+        (*mLhs)(i + 1, node.south + 1) = 2. / (north.y - south.y) / (node.y - south.y);
+        (*mLhs)(i + 1, node.west + 1) = 2. / (east.x - west.x) / (node.x - west.x);
     }
 
-    for (auto node : mGrid->bNodes)
-    {
-        int i = node.pos;
-        (*mLhs)(i + 1, i + 1) = 1.;
-    }
+    for (auto node : mGrid->bNodes) (*mLhs)(node.pos + 1, node.pos + 1) = 1.;
 
     std::cout << "LHS populated.\n"; 
 }
