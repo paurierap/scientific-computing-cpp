@@ -3,8 +3,7 @@
 #include <iostream>
 #include <cmath>
 
-FiniteDifferenceGrid::FiniteDifferenceGrid(int XnumNodes, int YnumNodes, double xmin, double xmax, 
-                                           double ymin, double ymax) : mXNumNodes(XnumNodes), mYNumNodes(YnumNodes)
+FiniteDifferenceGrid::FiniteDifferenceGrid(int XnumNodes, int YnumNodes, double xmin, double xmax, double ymin, double ymax) : mXNumNodes(XnumNodes), mYNumNodes(YnumNodes)
 {
     int count = 0;
     double hx = (xmax-xmin)/((double) (mXNumNodes-1));

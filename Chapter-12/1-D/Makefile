@@ -6,7 +6,6 @@
 
 # Variables to control Makefile operation
 LIB_DIR = lib
-MAIN_DIR = .
 
 # Find all the C++ files we want to compile
 SRCS := $(shell find $(LIB_DIR) -name '*.cpp')
@@ -26,7 +25,7 @@ CXXFLAGS = -Wall -O #-I /$(INC_DIR)
 Driver: Driver.o $(OBJS) #BoundaryConditions.o FiniteDifferenceGrid.o LinearSystem.o Matrix.o Vector.o BvpOde.o
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
-Driver.o: $(MAIN_DIR)/Driver.cpp
+Driver.o: Driver.cpp
 	$(CXX) $(CXXFLAGS) -c $^
 
 # Build step for C++ source

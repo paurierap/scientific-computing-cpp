@@ -1,5 +1,5 @@
-#include "../include/ForwardEulerSolver.h"
-#include "../include/RungeKuttaSolver.h"
+#include "lib/ForwardEulerSolver.hpp"
+#include "lib/RungeKuttaSolver.hpp"
 
 double f(double t, double y)
 {
@@ -18,12 +18,14 @@ int main()
         EulerSol[i].SetStepSize(h[i]);
         EulerSol[i].SetTimeInterval(t0, t1);
         EulerSol[i].SetInitialValue(y0);
+        EulerSol[i].SetFilename("results/Euler_" + std::to_string((int)(t1 / h[i])) + ".csv");
         EulerSol[i].p_fun = f;
         EulerSol[i].SolveEquation();
 
         RKSol[i].SetStepSize(h[i]);
         RKSol[i].SetTimeInterval(t0, t1);
         RKSol[i].SetInitialValue(y0);
+        RKSol[i].SetFilename("results/RK_" + std::to_string((int)(t1 / h[i])) + ".csv");
         RKSol[i].p_fun = f;
         RKSol[i].SolveEquation();
     }

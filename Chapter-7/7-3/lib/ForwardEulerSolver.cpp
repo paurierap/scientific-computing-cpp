@@ -1,4 +1,4 @@
-#include "../include/ForwardEulerSolver.h"
+#include "ForwardEulerSolver.hpp"
 #include <fstream>
 #include <cassert>
 #include <cmath>
@@ -10,7 +10,7 @@ double ForwardEulerSolver::RightHandSide(double t, double y)
 
 void ForwardEulerSolver::SolveEquation()
 {
-    std::ofstream output("Euler_" + std::to_string((int)(finalTime / stepSize)) + ".csv");
+    std::ofstream output(filename);
     assert(output.is_open());
     double t = initialTime, y = initialValue;
 

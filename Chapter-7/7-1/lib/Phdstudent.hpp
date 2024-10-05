@@ -1,7 +1,7 @@
 #ifndef PHDSTUDENTHPP
 #define PHDSTUDENTHPP
 
-#include "Gradstudent.h"
+#include "Gradstudent.hpp"
 #include <string>
 
 class Phdstudent : public Gradstudent

@@ -6,7 +6,6 @@
 
 # Variables to control Makefile operation
 LIB_DIR = ./lib
-MAIN_DIR = ./tests
 
 # Compilation flags
 CXX = g++
@@ -16,7 +15,7 @@ CXXFLAGS = -Wall -O #-I /$(INC_DIR)
 main: main.o Exception.o FileNotOpenException.o OutOfRangeException.o 
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
-main.o: $(MAIN_DIR)/main.cpp
+main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c $^
 
 %.o: $(LIB_DIR)/%.cpp

@@ -1,4 +1,4 @@
-#include "../include/RungeKuttaSolver.h"
+#include "RungeKuttaSolver.hpp"
 #include <fstream>
 #include <cassert>
 #include <cmath>
@@ -10,7 +10,7 @@ double RungeKuttaSolver::RightHandSide(double t, double y)
 
 void RungeKuttaSolver::SolveEquation()
 {
-    std::ofstream output("RK_" + std::to_string((int)(finalTime / stepSize)) + ".csv");
+    std::ofstream output(filename);
     assert(output.is_open());
     double t = initialTime, y = initialValue;
     double k1, k2, k3, k4;

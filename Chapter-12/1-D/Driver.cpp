@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
     bc1->setLhsDirichletBc(0.0);
     bc1->setRhsDirichletBc(0.0);
     BvpOde bvp1(ode1, bc1, numNodes1);
-    bvp1.setFilename("solution_problem1.dat");
+    bvp1.setFilename("results/solution_problem1.dat");
     bvp1.Solve();
     delete ode1;
     delete bc1;
@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
     bc2.setLhsNeumannBc(-5.0);
     bc2.setRhsDirichletBc(4.0);
     BvpOde bvp2(&ode2, &bc2, numNodes2);
-    bvp2.setFilename("solution_problem2.dat");
+    bvp2.setFilename("results/solution_problem2.dat");
     bvp2.Solve();*/
 
     // Try new SecondOrderOde constructor:
@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
     ode2.setXmin(0.0);
     ode2.setXmax(M_PI);
     BvpOde bvp2(&ode2, &bc2, numNodes2);
-    bvp2.setFilename("solution_problem2.dat");
+    bvp2.setFilename("results/solution_problem2.dat");
     bvp2.Solve();
     
     return 0;

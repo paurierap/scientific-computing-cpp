@@ -1,21 +1,20 @@
-# Makefile for Writing Make Files Example
- 
-# *****************************************************
 # Variables to control Makefile operation
- 
-CC = g++
-SRC = lib/matrix.cpp
-INC = include/matrix.h
-TEST = tests/main.cpp
-CFLAGS = -Wall -O
+LIB_DIR = lib
 
-matrix.o: $(SRC) $(INC)
-	$(CC) $(CFLAGS) -c $(SRC)
+# Compilation flags
+CXX = g++
+CXXFLAGS = -Wall -O #-I /$(INC_DIR)
 
-main.o: $(TEST) $(SRC) $(INC)
-	$(CC) $(CFLAGS) -c $(TEST)
+# $^ references all prerequisites, and $@ references the target name
+main: main.o matrix.o
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
-test: main.o matrix.o
-	$(CC) $(CFLAGS) -o test matrix.o main.o
+main.o: main.cpp
+	$(CXX) $(CXXFLAGS) -c $^
 
-clean: main.o matrix.o
+%.o: $(LIB_DIR)/%.cpp
+	$(CXX) $(CXXFLAGS) -c $^
+
+# Run "$ make clean" to remove all object files
+clean:
+	rm *.o

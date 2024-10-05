@@ -1,4 +1,4 @@
-#include "../include/AbstractOdeSolver.h"
+#include "AbstractOdeSolver.hpp"
 
 void AbstractOdeSolver::SetStepSize(double h)
 {
@@ -14,4 +14,9 @@ void AbstractOdeSolver::SetTimeInterval(double t0, double t1)
 void AbstractOdeSolver::SetInitialValue(double y0)
 {
     initialValue = y0;
+}
+
+void AbstractOdeSolver::SetFilename(std::string fname)
+{
+    filename = fname;
 }

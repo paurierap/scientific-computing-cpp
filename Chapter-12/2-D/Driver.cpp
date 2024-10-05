@@ -27,8 +27,8 @@ int main(int argc, char* argv[])
 
     int XnumNodes = 51, YnumNodes = 51;
     BvpOde bvp(&ode, &bc, XnumNodes, YnumNodes);
-    bvp.setFilename("solution_poisson.dat");
-    bvp.getGrid();
+    bvp.setFilename("results/solution_poisson.dat");
+    bvp.getGrid("results/x_grid.dat", "results/y_grid.dat");
     bvp.Solve();
     
     return 0;

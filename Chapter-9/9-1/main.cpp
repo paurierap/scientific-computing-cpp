@@ -1,6 +1,6 @@
-#include "../lib/Exception.hpp"
-#include "../lib/FileNotOpenException.hpp"
-#include "../lib/OutOfRangeException.hpp"
+#include "lib/Exception.hpp"
+#include "lib/FileNotOpenException.hpp"
+#include "lib/OutOfRangeException.hpp"
 #include <fstream>
 #include <iostream>
 #include <string>

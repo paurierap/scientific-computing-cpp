@@ -1,6 +1,6 @@
 // Use only Runge Kutta solver
-#include "../lib/RungeKuttaSolver.hpp"
-#include "../lib/StepSizeException.hpp"
+#include "lib/RungeKuttaSolver.hpp"
+#include "lib/StepSizeException.hpp"
 #include <cassert>
 #include <exception>
 #include <iostream>
@@ -29,6 +29,7 @@ int main()
             RKSol.SetStepSize(h);
             RKSol.SetTimeInterval(t0, t1);
             RKSol.SetInitialValue(y0);
+            RKSol.SetFilename("results/RK_" + std::to_string((int)(t1 / h)) + ".csv");
             RKSol.p_fun = &f;
             RKSol.SolveEquation();
             repeat = false;

@@ -125,12 +125,12 @@ void BvpOde::Solve()
 }
 
 // Write grid file:
-void BvpOde::getGrid()
+void BvpOde::getGrid(std::string x_grid_file, std::string y_grid_file)
 {
     std::ofstream xgrid;
     std::ofstream ygrid;
-    xgrid.open("x_grid.dat");
-    ygrid.open("y_grid.dat");
+    xgrid.open(x_grid_file);
+    ygrid.open(y_grid_file);
 
     for (int i = 0; i < mYNumNodes; i++)
     {

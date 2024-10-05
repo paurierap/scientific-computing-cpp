@@ -1,4 +1,4 @@
-#include "../include/Gradstudent.h"
+#include "Gradstudent.hpp"
 
 double Gradstudent::total_owed() const
 {

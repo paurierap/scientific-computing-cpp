@@ -1,4 +1,4 @@
-#include "../include/Student.h"
+#include "Student.hpp"
 #include <cassert>
 
 Student::Student() : libfine(0), tuition(0)

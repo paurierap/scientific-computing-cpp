@@ -15,3 +15,8 @@ void AbstractOdeSolver::SetInitialValue(double y0)
 {
     initialValue = y0;
 }
+
+void AbstractOdeSolver::SetFilename(std::string fname)
+{
+    filename = fname;
+}

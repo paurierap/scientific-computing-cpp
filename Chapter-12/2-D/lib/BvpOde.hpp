@@ -41,7 +41,7 @@ public:
         mFilename = name;
     }
     void Solve();
-    void getGrid();
+    void getGrid(std::string, std::string);
     void WriteSolutionFile();
 };
 

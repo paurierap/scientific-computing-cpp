@@ -1,9 +1,9 @@
-#ifndef RUNGEKUTTAH
-#define RUNGEKUTTAH
+#ifndef FORWARDEULERH
+#define FORWARDEULERH
 
 #include "AbstractOdeSolver.hpp"
 
-class RungeKuttaSolver : public AbstractOdeSolver
+class ForwardEulerSolver : public AbstractOdeSolver
 {
 public:
     double (*p_fun)(double, double);
