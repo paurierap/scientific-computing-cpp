@@ -1,6 +1,8 @@
 # Guide to Scientific Computing in C++ exercises
 
-![Guide to Scientific Computing in C++](./img/cover.png)
+<p align="center">
+  <img src="./img/cover.png" />
+</p>
 
 This repository contains the code for (most) of the exercises provided in the book by Joe Pitt-Francis and Jonathan Whiteley. For the time being, the first chapters are omitted as they are very much introductory. Nonetheless, any beginners are welcome and even encouraged to do them to complete the repo!
 
