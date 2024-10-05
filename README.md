@@ -45,11 +45,11 @@ Chapter-4
 
 | **Chapter Number** | **Chapter Name** |
 | :--------------:   | :------------   |
-| 1 | <ul> <li> - [] Getting Started </li> </ul> |
-| 2 | <ul> <li> - [] Flow of Control </li> </ul>|
-| 3 | <ul> <li> - [] File Input and Output </li> </ul>|
-| 4 | <ul> <li> - [] Pointers </li> </ul>|
-| 5 | <ul> <li> - [] Blocks, Functions and Reference Variables </li> </ul>|
+| 1 | <ul> <li> - [ ] Getting Started </li> </ul> |
+| 2 | <ul> <li> - [ ] Flow of Control </li> </ul>|
+| 3 | <ul> <li> - [ ] File Input and Output </li> </ul>|
+| 4 | <ul> <li> - [ ] Pointers </li> </ul>|
+| 5 | <ul> <li> - [ ] Blocks, Functions and Reference Variables </li> </ul>|
 | 6 | <ul> <li> - [x] An Introduction to Classes </li> </ul>|
 | 7 | <ul> <li> - [x] Inheritance and Derived Classes </li> </ul>|
 | 8 | <ul> <li> - [ ] Templates </li> </ul>|
